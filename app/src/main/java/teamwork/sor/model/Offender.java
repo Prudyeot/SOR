@@ -11,9 +11,10 @@ public class Offender {
     private String docket;
     private String offence;
     private String offenceCount;
+    private String pdfUrl;
 
 
-    public Offender(String image, String sex, String name, String residence, String docket, String offence, String offenceCount) {
+    public Offender(String image, String sex, String name, String residence, String docket, String offence, String offenceCount,String pdfUrl) {
         this.image = image;
         this.sex = sex;
         this.name = name;
@@ -21,6 +22,7 @@ public class Offender {
         this.docket = docket;
         this.offence = offence;
         this.offenceCount = offenceCount;
+        this.pdfUrl=pdfUrl;
     }
 
 
@@ -37,6 +39,30 @@ public class Offender {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPdfUrl() {
+        return pdfUrl;
+    }
+
+    public void setPdfUrl(String pdfUrl) {
+        this.pdfUrl = pdfUrl;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getResidence() {
