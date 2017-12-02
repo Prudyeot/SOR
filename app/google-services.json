@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "212096395622",
+    "firebase_url": "https://sorfirebaseproject.firebaseio.com",
+    "project_id": "sorfirebaseproject",
+    "storage_bucket": "sorfirebaseproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212096395622:android:b2c21f897b3ed41c",
+        "android_client_info": {
+          "package_name": "teamwork.sor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212096395622-2q74kr52rg6tka5pjcjltf5qqpfl0bgi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "teamwork.sor",
+            "certificate_hash": "5525e902ff221237abc7dc351e52024d7e521c17"
+          }
+        },
+        {
+          "client_id": "212096395622-u7p18nu9gd7siego2qtisls8gkp80ka6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtpc22q1G4ED2gOIMOSDvwe_WmA4-_yoE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212096395622-u7p18nu9gd7siego2qtisls8gkp80ka6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
