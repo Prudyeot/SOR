@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "212096395622-irfkhf8bge3cugme0g8ftn6dg0mruhl5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "teamwork.sor",
+            "certificate_hash": "15d3bed3096023eebd4426e2a476b802e8db310b"
+          }
+        },
+        {
           "client_id": "212096395622-2q74kr52rg6tka5pjcjltf5qqpfl0bgi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

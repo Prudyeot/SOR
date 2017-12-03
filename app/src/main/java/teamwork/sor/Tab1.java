@@ -23,6 +23,8 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.data.DataFetcher;
 import com.bumptech.glide.load.model.stream.StreamModelLoader;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -48,18 +50,12 @@ public class Tab1 extends Fragment {
     static String event_key;
     private   StorageReference storageRef;
 private Context context;
-    public void onStart(){
+ /*   public void onStart(){
+//        startActivity(new Intent(context,PDFActivity.class));
         super.onStart();
-
-
-        // Utils.getDatabase();
-
-
-        //mref=Utils.getDatabase();
-
-        mRootRef= FirebaseDatabase.getInstance().getReference();
-      offendersRef=mRootRef.child("offenders");
-        offendersRef.keepSynced(true);
+        //mRootRef= FirebaseDatabase.getInstance().getReference();
+//      offendersRef=mRootRef.child("offenders");
+  //      offendersRef.keepSynced(true);
 
         FirebaseRecyclerAdapter<Offender, Viewholder> theAdapter = new FirebaseRecyclerAdapter<Offender, Viewholder>(Offender.class,R.layout.custom_view,Viewholder.class,offendersRef) {
 
@@ -95,7 +91,7 @@ private Context context;
                         byte[] data = baos.toByteArray();
 
 
-                        Intent i = new Intent(context, Expanded.class);
+                        Intent i = new Intent(context, PDFView.class);
                         Bundle mBundle = new Bundle();
                         mBundle.putSerializable("eventObj", (Serializable) offender);
                         mBundle.putInt("position", position);
@@ -120,42 +116,17 @@ private Context context;
 
         mRecyclerView.setAdapter(theAdapter);
 
-    }
-
-
-
-    public static class Viewholder extends RecyclerView.ViewHolder{
-TextView name, sex, offence;
-        ImageView image;
-        CardView cardView;
-        public  Viewholder(View v) {
-            super(v);
-
-name= v.findViewById(R.id.name);
-            offence=v.findViewById(R.id.offence);
-            sex=v.findViewById(R.id.sex);
-            cardView=v.findViewById(R.id.cardView_row);
-
-
-
-
-
-        }
-
-    }
-
-
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab1, container, false);
-        FirebaseDatabase.getInstance().goOnline();
-        mAuth = FirebaseAuth.getInstance();
-        storageRef = FirebaseStorage.getInstance().getReference();
-
-        mRootRef = FirebaseDatabase.getInstance().getReference();
-
+        //FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        //mRootRef = firebaseDatabase.getReference();
+       // mAuth = FirebaseAuth.getInstance();
+        //FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        //storageRef = firebaseStorage.getReference();
 
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
@@ -170,7 +141,7 @@ name= v.findViewById(R.id.name);
 
         // since I can connect from multiple devices, we store each connection instance separately
 // any time that connectionsRef's value is null (i.e. has no children) I am offline
-      uid = mAuth.getCurrentUser().getUid();
+      //uid = mAuth.getCurrentUser().getUid();
 
         return rootView;
     }
@@ -209,6 +180,27 @@ name= v.findViewById(R.id.name);
                 // No cancellation possible, Task does not expose cancellation
             }
         }
+    }
+
+
+    public static class Viewholder extends RecyclerView.ViewHolder{
+        TextView name, sex, offence;
+        ImageView image;
+        CardView cardView;
+        public  Viewholder(View v) {
+            super(v);
+
+            name= v.findViewById(R.id.name);
+            offence=v.findViewById(R.id.offence);
+            sex=v.findViewById(R.id.sex);
+            cardView=v.findViewById(R.id.cardView_row);
+
+
+
+
+
+        }
+
     }
 
 }

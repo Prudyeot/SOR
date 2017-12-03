@@ -1,5 +1,6 @@
 package teamwork.sor;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -84,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            //return true;
+            startActivity(new Intent(this,PDFActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
