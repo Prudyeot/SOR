@@ -1,4 +1,4 @@
-#**Welcome to SOR**
+#Welcome to SOR
 
 ***About SOR***
 
