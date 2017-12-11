@@ -1,6 +1,8 @@
 package teamwork.sor;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
+import io.sentry.event.BreadcrumbBuilder;
+import io.sentry.event.UserBuilder;
+import teamwork.sor.utils.SentryClass;
 
 import static teamwork.sor.R.layout.tab1;
 
@@ -43,21 +51,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Context ctx = this.getApplicationContext();
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+
+
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // Use the Sentry DSN (client key) from the Project Settings page on Sentry
+        String sentryDsn = getString(R.string.dns_key);
+        Sentry.init(sentryDsn, new AndroidSentryClientFactory(ctx));
+        logWithStaticAPI();
+       // unsafeMethod();
 
     }
 
@@ -109,11 +125,9 @@ public class MainActivity extends AppCompatActivity {
            switch (position){
 
                case 0:
-                   Tab1 tab1= new Tab1();
-                            return tab1;
+                   return new Tab1();
                case 1:
-                  Tab2 tab2=new Tab2();
-                   return tab2;
+                   return new Tab2();
 
             default:
 
@@ -138,6 +152,60 @@ public class MainActivity extends AppCompatActivity {
                     return "SECTION 3";
             }
             return null;
+        }
+    }
+
+    /**
+     * An example method that throws an exception.
+     */
+    void unsafeMethod() {
+        throw new UnsupportedOperationException("You shouldn't call this!");
+    }
+
+    /**
+     * Note that the ``Sentry.init`` method must be called before the static API
+     * is used, otherwise a ``NullPointerException`` will be thrown.
+     */
+    void logWithStaticAPI() {
+        /*
+        Record a breadcrumb in the current context which will be sent
+        with the next event(s). By default the last 100 breadcrumbs are kept.
+        */
+
+        String osVer = System.getProperty("os.version"); // OS version
+        String APILev = Build.VERSION.CODENAME;      // API Level
+        String deviceT = android.os.Build.DEVICE;           // Device
+        String devModel = android.os.Build.MODEL;            // Model
+        String prod = android.os.Build.PRODUCT;
+        Sentry.getContext().recordBreadcrumb(
+
+        new BreadcrumbBuilder().setMessage("User made an action with:"
+        +"OS" +osVer
+        +"API: "+ APILev
+        +"Device: "+deviceT
+        +"Model: "+devModel
+        +"Product: "+prod)
+                .build()
+        );
+//        Device
+
+        // Set the user in the current context.
+        Sentry.getContext().setUser(
+                new UserBuilder().setEmail("hello@sentry.io").build()
+        );
+
+        /*
+        This sends a simple event to Sentry using the statically stored instance
+        that was created in the ``main`` method.
+        */
+        Sentry.capture("This is a test");
+
+        try {
+            unsafeMethod();
+        } catch (Exception e) {
+            // This sends an exception event to Sentry using the statically stored instance
+            // that was created in the ``main`` method.
+            Sentry.capture(e);
         }
     }
 }

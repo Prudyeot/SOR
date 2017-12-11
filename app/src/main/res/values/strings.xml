@@ -7,4 +7,5 @@
     <string name="app_folder_name">Folder Name</string>
     <string name="error_could_not_download_pdf">Could Not Download PDF</string>
     <string name="txt_success">Success!</string>
+    <string name="dns_key">https://e44a19d2f9424560807783775f3b02b4:3823c7b633624141bcf95b0b2170ba8c@sentry.io/257300</string>
 </resources>
